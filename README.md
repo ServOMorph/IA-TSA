@@ -13,7 +13,9 @@ Explorer comment des outils basés sur l'intelligence artificielle peuvent soute
 
 ## Stack
 
-À définir.
+- **Web UI** : Flask 3.0 — lancer avec `python run.py` (port 4110, autoreload)
+- **Frontend** : Jinja2 + CSS charte SéréniaTech (dark mode, reduced motion)
+- **Docs** : `docs/web/` — répertoriés automatiquement dans l'UI (onglet Docs_web)
 
 ## Licence
 
