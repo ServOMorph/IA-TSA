@@ -1,0 +1,19 @@
+{% extends "activite_base.html" %}
+
+{% block title %}Choix entre deux — IA-TSA{% endblock %}
+{% block slug %}choix-a-deux{% endblock %}
+
+{% block stage %}
+<div class="choix-grid">
+  <button class="choix-zone" data-choix="gauche" data-tone="392">
+    <span class="choix-shape choix-shape-circle"></span>
+  </button>
+  <button class="choix-zone" data-choix="droite" data-tone="523">
+    <span class="choix-shape choix-shape-square"></span>
+  </button>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/choix.js') }}"></script>
+{% endblock %}

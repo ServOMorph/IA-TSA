@@ -1,6 +1,9 @@
 # Session interne Claude Code
 _contexte/
 
+# Donnees terrain (RGPD : hors repo)
+data/
+
 # OS
 .DS_Store
 Thumbs.db

@@ -418,6 +418,169 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   font-size: var(--text-sm);
 }
 
+/* ── Catalogue activités ─────────────────────────────────────────────── */
+.activity-cards {
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-lg) var(--space-xl);
+  border-bottom: 1px solid var(--color-bg-alt);
+  transition: background var(--transition-fast);
+}
+.activity-card:last-child { border-bottom: none; }
+.activity-card:hover { background: var(--color-bg-alt); }
+
+.activity-card-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-lg);
+  background: var(--color-primary-alpha);
+  color: var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.activity-card-icon svg { width: 20px; height: 20px; }
+
+.activity-card-body { flex: 1; }
+
+.activity-card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+.activity-card-desc {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xs);
+}
+
+.activity-card-profil {
+  display: inline-block;
+  font-size: var(--text-xs);
+  color: var(--color-primary-dark);
+  background: var(--color-primary-alpha);
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+}
+
+.activity-card-arrow {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+
+/* ── Retour terrain ──────────────────────────────────────────────────── */
+.rt-warning {
+  background: rgba(237,137,54,0.12);
+  color: #9c4221;
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.rt-form-wrap { margin-bottom: var(--space-xl); }
+
+.rt-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+}
+
+.rt-field { display: flex; flex-direction: column; gap: var(--space-xs); }
+.rt-field-full { grid-column: 1 / -1; }
+
+.rt-field label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+.rt-field select,
+.rt-field input,
+.rt-field textarea {
+  font: inherit;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-bg-dark);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+.rt-field textarea { resize: vertical; }
+
+.rt-submit {
+  padding: var(--space-sm) var(--space-xl);
+  background: var(--color-primary-dark);
+  color: #fff;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
+}
+.rt-submit:hover { background: var(--color-primary); }
+
+.rt-list { padding: var(--space-md) 0; }
+
+.rt-item {
+  padding: var(--space-md) var(--space-xl);
+  border-bottom: 1px solid var(--color-bg-alt);
+}
+.rt-item:last-child { border-bottom: none; }
+
+.rt-item-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xs);
+}
+
+.rt-item-activite {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.rt-item-date {
+  margin-left: auto;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.rt-badge {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+}
+.rt-badge-engage  { background: rgba(72,187,120,0.15);  color: #276749; }
+.rt-badge-neutre  { background: var(--color-bg-dark);    color: var(--color-text-muted); }
+.rt-badge-retrait { background: rgba(245,101,101,0.15); color: #c53030; }
+
+.rt-item-reglages {
+  font-size: var(--text-xs);
+  color: var(--color-primary-dark);
+  margin-bottom: var(--space-xs);
+}
+
+.rt-item-note {
+  font-size: var(--text-sm);
+  color: var(--color-text-light);
+}
+
+@media (max-width: 640px) {
+  .rt-form { grid-template-columns: 1fr; }
+}
+
 /* ── Mode sombre ─────────────────────────────────────────────────────── */
 @media (prefers-color-scheme: dark) {
   :root {
