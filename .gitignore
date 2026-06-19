@@ -1,0 +1,11 @@
+# Session interne Claude Code
+_contexte/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editeurs
+.vscode/
+*.swp
+*~
