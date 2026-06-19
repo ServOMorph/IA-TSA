@@ -32,6 +32,14 @@ ACTIVITES = [
                 "valide → la zone choisie s'anime. Proto-CAA par le choix.",
         "profil": "Vers la décision et la communication par le choix",
     },
+    {
+        "slug": "timer",
+        "endpoint": "activite_timer",
+        "name": "Timer visuel",
+        "desc": "Sablier circulaire qui se vide progressivement. Signal doux en fin "
+                "de temps. Durée réglable (1 à 15 min). Matérialise l'attente.",
+        "profil": "Structuration du temps, gestion de l'anxiété liée aux transitions",
+    },
 ]
 
 ENGAGEMENTS = ["engage", "neutre", "retrait"]
@@ -115,6 +123,11 @@ def activite_cause_effet():
 @bp.route("/activites/choix-a-deux")
 def activite_choix():
     return render_template("activite_choix.html")
+
+
+@bp.route("/activites/timer")
+def activite_timer():
+    return render_template("activite_timer.html")
 
 
 @bp.route("/retour-terrain", methods=["GET"])

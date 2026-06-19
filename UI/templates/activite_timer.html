@@ -1,0 +1,92 @@
+{% extends "activite_base.html" %}
+
+{% block title %}Timer visuel — IA-TSA{% endblock %}
+{% block slug %}timer{% endblock %}
+
+{% block stage %}
+<div class="timer-stage" id="timer-stage">
+
+  <!-- 1. Anneau -->
+  <div class="timer-visual" id="visual-anneau">
+    <div class="timer-ring-wrap">
+      <svg class="timer-svg" viewBox="0 0 300 300" aria-hidden="true">
+        <circle class="timer-track" cx="150" cy="150" r="130"/>
+        <circle class="timer-ring" id="timer-ring" cx="150" cy="150" r="130"/>
+      </svg>
+      <div class="timer-display">
+        <span class="timer-time-el">5:00</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Blocs -->
+  <div class="timer-visual" id="visual-blocs" hidden>
+    <div class="blocs-grid" id="blocs-grid"></div>
+    <span class="timer-time-el timer-time-below">5:00</span>
+  </div>
+
+  <!-- 3. Barre -->
+  <div class="timer-visual" id="visual-barre" hidden>
+    <div class="barre-container">
+      <div class="barre-fill" id="barre-fill"></div>
+    </div>
+    <span class="timer-time-el timer-time-below">5:00</span>
+  </div>
+
+  <!-- 4. Soleil -->
+  <div class="timer-visual" id="visual-soleil" hidden>
+    <div class="soleil-scene">
+      <div class="soleil-orb" id="soleil-orb"></div>
+      <div class="soleil-horizon"></div>
+      <span class="timer-time-el soleil-time">5:00</span>
+    </div>
+  </div>
+
+  <!-- 5. Couleur -->
+  <div class="timer-visual timer-visual-couleur" id="visual-couleur" hidden>
+    <div class="couleur-fill" id="couleur-fill"></div>
+    <span class="timer-time-el couleur-time">5:00</span>
+  </div>
+
+  <!-- Commun : réglage durée + boutons -->
+  <div class="timer-picker-stage" id="picker-stage">
+    <div class="timer-picker-row">
+      <button class="timer-stage-adj-btn" id="btn-min-m" aria-label="Moins de minutes">−</button>
+      <span class="timer-picker-label" id="disp-min-label">5 min</span>
+      <button class="timer-stage-adj-btn" id="btn-min-p" aria-label="Plus de minutes">+</button>
+    </div>
+    <div class="timer-picker-row">
+      <button class="timer-stage-adj-btn" id="btn-sec-m" aria-label="Moins de secondes">−</button>
+      <span class="timer-picker-label" id="disp-sec-label">00 sec</span>
+      <button class="timer-stage-adj-btn" id="btn-sec-p" aria-label="Plus de secondes">+</button>
+    </div>
+  </div>
+
+  <div class="timer-buttons">
+    <button class="timer-btn timer-btn-secondary" id="btn-timer-reset" aria-label="Remettre à zéro">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="28" height="28">
+        <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4"/>
+      </svg>
+    </button>
+    <button class="timer-btn" id="btn-timer-start">Démarrer</button>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block panel_extra %}
+<div class="panel-row panel-row-col">
+  <span>Visuel</span>
+  <div class="visual-picker" id="visual-picker">
+    <button class="visual-opt" data-visual="anneau">Anneau</button>
+    <button class="visual-opt" data-visual="blocs">Blocs</button>
+    <button class="visual-opt" data-visual="barre">Barre</button>
+    <button class="visual-opt" data-visual="soleil">Soleil</button>
+    <button class="visual-opt" data-visual="couleur">Couleur</button>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/timer.js') }}"></script>
+{% endblock %}

@@ -165,6 +165,303 @@ html, body { height: 100%; }
 
 .calme .choix-shape { filter: saturate(0.5); }
 
+/* ── Timer visuel ────────────────────────────────────────────────────── */
+.timer-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+}
+
+/* Conteneur générique de visuel */
+.timer-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.timer-visual[hidden] { display: none; }
+
+/* Texte temps — commun à tous les visuels */
+.timer-time-el {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: #e5e7eb;
+}
+
+.timer-time-below {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  margin-top: 8px;
+}
+
+/* ── Anneau ── */
+.timer-ring-wrap {
+  position: relative;
+  width: min(55vw, 55vh, 300px);
+  height: min(55vw, 55vh, 300px);
+}
+
+.timer-svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.timer-track {
+  fill: none;
+  stroke: rgba(255,255,255,0.08);
+  stroke-width: 16;
+}
+
+.timer-ring {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 16;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.calme .timer-ring { stroke: rgba(165,201,202,0.45); }
+
+.timer-display {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Blocs ── */
+.blocs-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  width: min(360px, 80vw);
+}
+
+.bloc-cell {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  transition: background 600ms ease;
+}
+
+.bloc-cell.bloc-on { background: var(--accent); }
+.calme .bloc-cell.bloc-on { background: rgba(165,201,202,0.45); }
+
+/* ── Barre ── */
+.barre-container {
+  width: min(580px, 85vw);
+  height: 72px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.barre-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 20px;
+  transition: width 1s linear;
+}
+
+.calme .barre-fill { background: rgba(165,201,202,0.45); }
+
+/* ── Soleil ── */
+.soleil-scene {
+  position: relative;
+  width: min(420px, 85vw);
+  height: min(280px, 38vh);
+  border-radius: 20px;
+  background: linear-gradient(to bottom, #162844 0%, #0e1726 100%);
+  overflow: hidden;
+}
+
+.soleil-orb {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffd97d 20%, #f6c177 65%, transparent 100%);
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 48px rgba(246,193,119,0.55);
+  transition: top 1s linear, opacity 400ms ease;
+}
+
+.calme .soleil-orb {
+  background: radial-gradient(circle, rgba(255,217,125,0.4) 20%, rgba(246,193,119,0.2) 65%, transparent 100%);
+  box-shadow: none;
+}
+
+.soleil-horizon {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 25%;
+  background: #0e1726;
+  border-top: 2px solid rgba(165,201,202,0.18);
+}
+
+.soleil-time {
+  position: absolute;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  color: rgba(165,201,202,0.85);
+}
+
+/* ── Couleur ── */
+.timer-visual-couleur {
+  position: relative;
+  width: min(520px, 85vw);
+  height: min(340px, 42vh);
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.04);
+}
+
+.couleur-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+}
+
+.calme .couleur-fill { background: rgba(165,201,202,0.45); }
+
+.couleur-time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+  z-index: 5;
+}
+
+/* ── Boutons et picker ── */
+.timer-buttons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.timer-btn {
+  min-width: 140px;
+  height: 68px;
+  border-radius: 20px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #0e1726;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+  transition: transform 120ms ease, filter 120ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.timer-btn:active { transform: scale(0.93); }
+.timer-btn-secondary {
+  min-width: 68px;
+  background: rgba(255,255,255,0.10);
+  color: #e5e7eb;
+}
+.timer-btn-secondary:hover { background: rgba(255,255,255,0.18); }
+.calme .timer-btn { filter: saturate(0.5); }
+
+.timer-picker-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.timer-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.timer-stage-adj-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.10);
+  color: #e5e7eb;
+  font-size: 1.8rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 120ms ease, transform 100ms ease;
+}
+.timer-stage-adj-btn:hover { background: rgba(255,255,255,0.20); }
+.timer-stage-adj-btn:active { transform: scale(0.90); background: var(--accent); color: #0e1726; }
+
+.timer-picker-label {
+  min-width: 90px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #e5e7eb;
+}
+
+.panel-row-col {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.visual-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.visual-opt {
+  width: 100%;
+  padding: 9px 14px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.07);
+  color: var(--panel-text);
+  border: 1px solid transparent;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 120ms ease;
+}
+.visual-opt:hover { background: rgba(255,255,255,0.15); }
+.visual-opt.active {
+  background: var(--accent);
+  color: #0e1726;
+  font-weight: 700;
+}
+
+@keyframes timer-flash {
+  0%   { opacity: 1; }
+  40%  { opacity: 0.15; }
+  100% { opacity: 1; }
+}
+
+.timer-ring-end { animation: timer-flash 600ms ease 3; }
+.timer-time-end { animation: timer-flash 600ms ease 3; }
+
 @media (prefers-reduced-motion: reduce) {
   .ce-burst, .choix-zone.active { animation: none; }
   *, *::before, *::after { transition-duration: 0.01ms !important; }
