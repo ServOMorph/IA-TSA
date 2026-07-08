@@ -20,8 +20,8 @@
       <nav class="sidebar-nav">
 
         <div class="nav-section">
-          <button class="nav-section-toggle {% if active in ('docs_web',) %}open{% endif %}"
-                  aria-expanded="{% if active in ('docs_web',) %}true{% else %}false{% endif %}"
+          <button class="nav-section-toggle {% if active in ('docs',) %}open{% endif %}"
+                  aria-expanded="{% if active in ('docs',) %}true{% else %}false{% endif %}"
                   onclick="toggleSection(this)">
             <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -32,15 +32,15 @@
             </svg>
           </button>
 
-          <ul class="nav-sub {% if active in ('docs_web',) %}open{% endif %}">
+          <ul class="nav-sub {% if active in ('docs',) %}open{% endif %}">
             <li>
-              <a href="{{ url_for('main.docs_web') }}"
-                 class="nav-sub-item {% if active == 'docs_web' %}active{% endif %}">
+              <a href="{{ url_for('main.docs_view') }}"
+                 class="nav-sub-item {% if active == 'docs' %}active{% endif %}">
                 <svg class="nav-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                   <polyline points="14 2 14 8 20 8"/>
                 </svg>
-                Docs_web
+                Documents
               </a>
             </li>
           </ul>

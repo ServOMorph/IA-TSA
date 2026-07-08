@@ -1,6 +1,6 @@
 # Autisme (TSA) et Informatique — Document de Référence
 
-> Document de synthèse pour le projet IA-TSA. Croise les ressources de [`docs/web/site_internet_references.md`](web/site_internet_references.md) avec une revue d'articles web (juin 2026). Vocation : base de données de référence sur l'apport du numérique et de l'IA pour les personnes autistes en contexte éducatif.
+> Document de synthèse pour le projet IA-TSA. Croise les ressources de [`docs/web/site_internet_references.md`](../web/site_internet_references.md) avec une revue d'articles web (juin 2026). Vocation : base de données de référence sur l'apport du numérique et de l'IA pour les personnes autistes en contexte éducatif.
 >
 > **Avertissement méthodologique** : les affirmations sont sourcées. Les distinctions fait / hypothèse / résultat préliminaire sont signalées. Les chiffres proviennent des sources citées et ne sont pas extrapolés. Aucune donnée concernant des enfants ou un établissement réel n'est présente (conformité RGPD).
 
@@ -24,7 +24,7 @@ Caractéristiques fréquentes qui orientent le choix des outils :
 
 Plusieurs sources convergent sur les raisons structurelles de l'efficacité du numérique :
 
-- **Prévisibilité et absence de jugement** : une machine réagit toujours de la même façon, sans la charge sociale d'un visage humain. Les enfants autistes préfèrent souvent les technologies car elles sont « sans surprise, prévisibles, structurées et exemptes de jugement » ([sites de référence du projet](web/site_internet_references.md)).
+- **Prévisibilité et absence de jugement** : une machine réagit toujours de la même façon, sans la charge sociale d'un visage humain. Les enfants autistes préfèrent souvent les technologies car elles sont « sans surprise, prévisibles, structurées et exemptes de jugement » ([sites de référence du projet](../web/site_internet_references.md)).
 - **Support visuel natif** : tablettes et écrans matérialisent le temps, les étapes et les choix — ce qui correspond au mode de traitement visuel.
 - **Réduction de la surcharge cognitive** : les outils de planification numérique permettent de séquencer et d'alléger la charge mentale ([Réseau Canopé](https://www.reseau-canope.fr/agence-des-usages/accompagner-les-personnes-avec-autisme-via-un-agenda-numerique.html)).
 - **Personnalisation** : les applications adaptatives ajustent la difficulté au rythme de l'enfant en temps réel.
@@ -60,7 +60,7 @@ Les **robots sociaux** servent de médiateur d'apprentissage prévisible.
 
 - **Kaspar** (Université du Hertfordshire, 2005) : robot humanoïde conçu pour les enfants autistes. Utilisé dans des études longitudinales auprès d'environ **170 enfants**, sur plusieurs semaines à plusieurs mois, à l'école et à domicile. Outil d'apprentissage sûr et prévisible des interactions sociales ([Cairn / ENF2](https://shs.cairn.info/article/ENF2_181_0091/pdf?lang=fr), [MBA MCI](https://mbamci.com/kaspar-le-robot-humanoide-social/)).
 - **NAO** : interventions à base comportementale rapportées comme efficaces pour le langage et la communication, avec une **efficacité comparable à celle de thérapeutes humains** dans certaines études ; le design et le langage corporel favoriseraient le contact visuel ([UQAC, étude de cas](https://constellation.uqac.ca/id/eprint/9943/), [arXiv](https://arxiv.org/pdf/2407.12014)).
-- **QTrobot (LuxAI)** : jeux sur tablette pour la reconnaissance et la dénomination des émotions. Modèle économique : matériel + abonnement logiciel mensuel ([référence projet](web/site_internet_references.md)).
+- **QTrobot (LuxAI)** : jeux sur tablette pour la reconnaissance et la dénomination des émotions. Modèle économique : matériel + abonnement logiciel mensuel ([référence projet](../web/site_internet_references.md)).
 
 > **Nuance honnête** : « efficacité comparable aux thérapeutes » provient d'études de cas ou d'échantillons limités. Résultats **prometteurs mais non généralisables**. Le robot est un médiateur, pas un substitut à l'accompagnement humain.
 
@@ -77,7 +77,7 @@ Composante essentielle de l'intervention selon la HAS : rendre les changements p
 
 ### 3.6 Activités cause-effet / sensorielles (profils à besoins importants)
 
-Pour TSA non verbal avec troubles moteurs sévères — activités navigateur, gratuites, sans IA. Détail dans [`site_internet_references.md`](web/site_internet_references.md#-activités-pratiques-en-salle-informatique-cause-effet--sensoriel) : Shiny Learning, SpecialBites, HelpKidzLearn, WonderTree, Little Miss Kim's Class.
+Pour TSA non verbal avec troubles moteurs sévères — activités navigateur, gratuites, sans IA. Détail dans [`site_internet_references.md`](../web/site_internet_references.md#-activités-pratiques-en-salle-informatique-cause-effet--sensoriel) : Shiny Learning, SpecialBites, HelpKidzLearn, WonderTree, Little Miss Kim's Class.
 
 - **Principe** : l'accompagnant pilote, l'apprenant indique un choix (regard, geste, vocalise) → action confirmée → réaction visuelle/sonore immédiate = lien causal. Donne un contrôle décisionnel même sans motricité fine.
 
@@ -124,7 +124,7 @@ Pour TSA non verbal avec troubles moteurs sévères — activités navigateur, g
 - [Cairn — Kaspar (ENF2)](https://shs.cairn.info/article/ENF2_181_0091/pdf?lang=fr) · [MBA MCI — Kaspar](https://mbamci.com/kaspar-le-robot-humanoide-social/) · [UQAC — NAO étude de cas](https://constellation.uqac.ca/id/eprint/9943/) · [arXiv — NAO en classe](https://arxiv.org/pdf/2407.12014)
 - [Hop'Toys — CAA](https://www.bloghoptoys.fr/la-communication-alternative-augmentee) · [APF Infos Handicaps — FALC/CAA](https://infos-handicaps.apf-francehandicap.org/selection-ressources-outils-facile-lire-comprendre-falc-communication-alternative-amelioree-caa) · [Santé Mentale — CHU Nantes](https://www.santementale.fr/2026/03/autisme-la-communication-alternative-et-amelioree-renforcee/) · [NCBI — letter board vers iPad](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11148795/)
 - [Réseau Canopé — agenda numérique](https://www.reseau-canope.fr/agence-des-usages/accompagner-les-personnes-avec-autisme-via-un-agenda-numerique.html) · [QuelBonPlan — apps 2025](https://www.quelbonplan.fr/blogs/articles/10-applications-pour-les-enfants-autistes-asperger-ou-ted)
-- Ressources internes du projet : [`docs/web/site_internet_references.md`](web/site_internet_references.md)
+- Ressources internes du projet : [`docs/web/site_internet_references.md`](../web/site_internet_references.md)
 
 ---
 

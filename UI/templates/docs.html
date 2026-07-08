@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block title %}Recherches — IA-TSA{% endblock %}
+
+{% macro render_tree(nodes, current) %}
+<ul class="doc-tree-list">
+  {% for node in nodes %}
+  <li class="doc-tree-item">
+    {% if node.type == "dir" %}
+    <details class="doc-tree-dir" open>
+      <summary class="doc-tree-dir-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        {{ node.name }}
+      </summary>
+      {{ render_tree(node.children, current) }}
+    </details>
+    {% else %}
+    <a href="{{ url_for('main.docs_view', filename=node.path) }}"
+       class="doc-tree-file {% if node.path == current %}active{% endif %}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      {{ node.name }}
+    </a>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% endmacro %}
+
+{% block content %}
+<div class="page-header">
+  <div class="breadcrumb">
+    <span>Recherches</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    <span class="breadcrumb-current">Documents</span>
+  </div>
+  <h1 class="page-title">Documents du projet</h1>
+  <p class="page-subtitle">Arborescence complète de docs/ — cliquez un fichier pour l'ouvrir</p>
+</div>
+
+<div class="docs-explorer">
+  <nav class="docs-tree">
+    {% if tree %}
+      {{ render_tree(tree, current) }}
+    {% else %}
+      <p class="doc-tree-empty">Aucun document dans <code>docs/</code></p>
+    {% endif %}
+  </nav>
+
+  <div class="docs-content">
+    {% if content %}
+      <div class="docs-content-bar">
+        <span class="doc-current-path">{{ current }}</span>
+        <a href="{{ url_for('main.docs_raw', filename=current) }}" class="btn-open" target="_blank" rel="noopener" title="Voir le fichier brut">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+      <article class="doc-prose">
+        {{ content|safe }}
+      </article>
+    {% else %}
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+        <p>Sélectionnez un document</p>
+        <span>Choisissez un fichier dans l'arborescence à gauche pour l'afficher ici.</span>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
