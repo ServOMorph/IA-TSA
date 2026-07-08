@@ -1,0 +1,25 @@
+{% extends "activite_base.html" %}
+
+{% block title %}Écris et écoute — IA-TSA{% endblock %}
+{% block slug %}ecrire-ecoute{% endblock %}
+
+{% block stage %}
+<div class="ecoute-stage" id="ecoute-stage">
+  <div class="ecoute-history" id="ecoute-history" aria-live="polite"></div>
+  <div class="ecoute-input-row">
+    <input type="text" id="ecoute-input" class="ecoute-input" placeholder="Écris ici…"
+           autocomplete="off" autocapitalize="off" spellcheck="false">
+    <button class="ecoute-btn" id="btn-ecoute-lire" aria-label="Lire à voix haute">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+      </svg>
+    </button>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/ecoute.js') }}"></script>
+{% endblock %}

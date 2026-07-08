@@ -13,10 +13,11 @@ Explorer comment des outils basés sur l'intelligence artificielle peuvent soute
 
 ## Stack
 
-- **Web UI** : Flask 3.0 — lancer avec `python run.py` (port 4110, autoreload)
+- **Web UI** : Flask 3.0 — `pip install -r requirements.txt` puis `python run.py` (port 4110, autoreload)
 - **Frontend** : Jinja2 + JS vanilla + CSS charte SéréniaTech (dark mode, reduced motion)
 - **Docs** : `docs/` (pedagogie/, reference/, web/) — explorateur arborescent dans l'UI (onglet Recherches), rendu Markdown
-- **Activités** : activités codées maison (onglet Activités) — cause-effet pur, choix entre deux
+- **Activités** : activités codées maison (onglet Activités) — cause-effet pur, choix entre deux, timer visuel, écris et écoute
+- **Synthèse vocale** : Piper TTS (local, gratuit) pour l'activité "Écris et écoute" — modèle voix à télécharger sur chaque poste : `python -m piper.download_voices fr_FR-siwis-medium --download-dir voices` (non versionné, gitignoré)
 - **Retours terrain** : onglet Terrain dans la sidebar — notes d'observation persistées localement (`data/`, gitignoré RGPD)
 
 ## Licence

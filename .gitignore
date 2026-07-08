@@ -4,6 +4,9 @@ _contexte/
 # Donnees terrain (RGPD : hors repo)
 data/
 
+# Modeles vocaux Piper TTS (binaires lourds, telecharges via python -m piper.download_voices)
+voices/
+
 # OS
 .DS_Store
 Thumbs.db
