@@ -15,6 +15,9 @@
     <aside class="sidebar">
       <div class="sidebar-header">
         <span class="sidebar-logo">IA-TSA</span>
+        {% if current_user %}
+        <a href="{{ url_for('main.utilisateur') }}" class="sidebar-user" title="Changer d'utilisateur">{{ current_user }}</a>
+        {% endif %}
       </div>
 
       <nav class="sidebar-nav">

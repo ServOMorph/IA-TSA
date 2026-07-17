@@ -739,6 +739,71 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   .rt-form { grid-template-columns: 1fr; }
 }
 
+/* ── Sélection utilisateur ───────────────────────────────────────────── */
+.sidebar-user {
+  display: inline-block;
+  margin-top: var(--space-xs);
+  font-size: var(--text-xs);
+  color: var(--color-primary-light);
+  opacity: 0.8;
+}
+.sidebar-user:hover { opacity: 1; text-decoration: underline; }
+
+.user-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid var(--color-bg-dark);
+  border-radius: var(--radius-md);
+}
+
+.user-select-btn {
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--color-text);
+}
+.user-select-btn:hover { color: var(--color-primary-dark); }
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.user-rename-form { display: flex; gap: var(--space-xs); }
+
+.user-rename-input {
+  font: inherit;
+  font-size: var(--text-sm);
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--color-bg-dark);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  color: var(--color-text);
+  width: 8rem;
+}
+
+.user-mini-btn {
+  font-size: var(--text-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-dark);
+  color: var(--color-text);
+}
+.user-mini-btn:hover { background: var(--color-primary); color: #fff; }
+
+.user-delete-btn { color: #c53030; }
+.user-delete-btn:hover { background: #c53030; color: #fff; }
+
 /* ── Mode sombre ─────────────────────────────────────────────────────── */
 @media (prefers-color-scheme: dark) {
   :root {

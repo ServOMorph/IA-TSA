@@ -102,12 +102,35 @@ const ActivityCore = (function () {
     return el.closest(".activity-controls") || el.closest(".activity-panel");
   }
 
+  function logEvent(event, detail) {
+    try {
+      fetch("/api/log-event", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        keepalive: true,
+        body: JSON.stringify({ activite: slug, event: event, detail: detail }),
+      });
+    } catch (e) {}
+  }
+
+  function logExit() {
+    if (!navigator.sendBeacon) return;
+    var blob = new Blob(
+      [JSON.stringify({ activite: slug, event: "sortie", detail: null })],
+      { type: "application/json" }
+    );
+    navigator.sendBeacon("/api/log-event", blob);
+  }
+
   document.addEventListener("DOMContentLoaded", initControls);
+  document.addEventListener("DOMContentLoaded", function () { logEvent("ouverture", null); });
+  document.addEventListener("pagehide", logExit);
 
   return {
     settings: settings,
     playTone: playTone,
     onChange: onChange,
     isControl: isControl,
+    logEvent: logEvent,
   };
 })();

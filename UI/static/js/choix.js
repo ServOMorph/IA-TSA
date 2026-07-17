@@ -20,6 +20,7 @@
     zone.classList.add("active");
     if (other) other.classList.add("dim");
     ActivityCore.playTone(+zone.dataset.tone || 440, 460);
+    ActivityCore.logEvent("choix", zone === zones[0] ? "gauche" : "droite");
     setTimeout(function () {
       zone.classList.remove("active");
       if (other) other.classList.remove("dim");

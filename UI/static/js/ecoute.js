@@ -83,6 +83,7 @@
     const entry = entries.find(function (e) { return e.id === id; });
     if (!entry || btn.disabled) return;
     btn.disabled = true;
+    ActivityCore.logEvent("lecture", null);
     speakText(entry.text).finally(function () {
       btn.disabled = false;
     });
@@ -103,7 +104,10 @@
 
     function commit() {
       const val = editInput.value.trim();
-      if (val) entry.text = val;
+      if (val) {
+        entry.text = val;
+        ActivityCore.logEvent("modification", null);
+      }
       render();
     }
 
@@ -127,6 +131,7 @@
     entries.push(entry);
     input.value = "";
     render();
+    ActivityCore.logEvent("ligne-ajoutee", null);
 
     addBtn.disabled = true;
     speakText(text).finally(function () {

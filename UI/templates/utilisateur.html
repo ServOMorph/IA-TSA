@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}Choisir un utilisateur — IA-TSA{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1 class="page-title">Choisir un utilisateur</h1>
+  <p class="page-subtitle">Sélectionne ton nom pour continuer, ou crée-en un nouveau</p>
+</div>
+
+<div class="page-body user-list">
+  {% for u in users %}
+  <div class="user-card">
+    <form method="post" action="{{ url_for('main.utilisateur') }}" class="user-select-form">
+      <input type="hidden" name="nom" value="{{ u.name }}">
+      <button type="submit" class="user-select-btn">{{ u.name }}</button>
+    </form>
+    <div class="user-actions">
+      <form method="post" action="{{ url_for('main.utilisateur_renommer', nom=u.name) }}" class="user-rename-form">
+        <input type="text" name="nouveau" placeholder="renommer..." class="user-rename-input">
+        <button type="submit" class="user-mini-btn">OK</button>
+      </form>
+      {% if u.name != "admin" %}
+      <form method="post" action="{{ url_for('main.utilisateur_supprimer', nom=u.name) }}">
+        <button type="submit" class="user-mini-btn user-delete-btn">Supprimer</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="page-body">
+  <form method="post" action="{{ url_for('main.utilisateur') }}" class="rt-form user-create-form">
+    <div class="rt-field rt-field-full">
+      <label for="nom-nouveau">Nouvel utilisateur</label>
+      <input type="text" name="nom" id="nom-nouveau" placeholder="ex : educ2" required>
+    </div>
+    <div class="rt-field-full">
+      <button type="submit" class="rt-submit">Créer et continuer</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

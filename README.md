@@ -19,6 +19,7 @@ Explorer comment des outils basés sur l'intelligence artificielle peuvent soute
 - **Activités** : activités codées maison (onglet Activités) — cause-effet pur, choix entre deux, timer visuel, écris et écoute
 - **Synthèse vocale** : Piper TTS (local, gratuit) pour l'activité "Écris et écoute" — modèle voix à télécharger sur chaque poste : `python -m piper.download_voices fr_FR-siwis-medium --download-dir voices` (non versionné, gitignoré)
 - **Retours terrain** : onglet Terrain dans la sidebar — notes d'observation persistées localement (`data/`, gitignoré RGPD)
+- **Session utilisateur** : sélection d'un utilisateur (éducateur) à l'ouverture (`/utilisateur`, admin par défaut) + logging horodaté des parcours (navigation et événements d'activité), sans donnée sur l'enfant (`data/`, gitignoré RGPD)
 
 ## Licence
 

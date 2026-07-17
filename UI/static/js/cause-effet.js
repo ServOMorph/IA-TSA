@@ -30,6 +30,7 @@
     el.addEventListener("animationend", function () { el.remove(); });
 
     ActivityCore.playTone(rand(effect.tones), 380);
+    ActivityCore.logEvent("declenchement", kind);
   }
 
   function fromCenter(kind) {

@@ -8,7 +8,7 @@ from html import escape
 from datetime import datetime
 from flask import (
     Blueprint, render_template, send_from_directory, abort,
-    request, redirect, url_for, Response,
+    request, redirect, url_for, Response, session,
 )
 
 bp = Blueprint("main", __name__)
@@ -17,6 +17,14 @@ DOCS_ROOT = os.path.join(os.path.dirname(__file__), "..", "docs")
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 RETOURS_FILE = os.path.join(DATA_DIR, "retours_terrain.json")
+USERS_FILE = os.path.join(DATA_DIR, "users.json")
+LOGS_DIR = os.path.join(DATA_DIR, "logs")
+
+UTILISATEUR_ENDPOINTS = (
+    "main.utilisateur",
+    "main.utilisateur_supprimer",
+    "main.utilisateur_renommer",
+)
 
 VOICES_DIR = os.path.join(os.path.dirname(__file__), "..", "voices")
 PIPER_MODEL = os.path.join(VOICES_DIR, "fr_FR-siwis-medium.onnx")
@@ -125,6 +133,39 @@ def _activite_name(slug):
     return slug
 
 
+def _load_users():
+    if not os.path.isfile(USERS_FILE):
+        users = [{"name": "admin", "created": datetime.now().strftime("%Y-%m-%d %H:%M")}]
+        _save_users(users)
+        return users
+    try:
+        with open(USERS_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, list) else []
+    except (json.JSONDecodeError, OSError):
+        return []
+
+
+def _save_users(users):
+    os.makedirs(os.path.abspath(DATA_DIR), exist_ok=True)
+    with open(USERS_FILE, "w", encoding="utf-8") as f:
+        json.dump(users, f, ensure_ascii=False, indent=2)
+
+
+def _user_names(users):
+    return [u["name"] for u in users]
+
+
+def _log_event(user, type_, **fields):
+    os.makedirs(os.path.abspath(LOGS_DIR), exist_ok=True)
+    month = datetime.now().strftime("%Y-%m")
+    path = os.path.join(LOGS_DIR, f"activite_{month}.jsonl")
+    entry = {"ts": datetime.now().isoformat(timespec="seconds"), "user": user, "type": type_}
+    entry.update({k: v for k, v in fields.items() if v is not None})
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+
+
 def _get_piper_voice():
     global _piper_voice
     if _piper_voice is None:
@@ -133,6 +174,93 @@ def _get_piper_voice():
                 from piper import PiperVoice
                 _piper_voice = PiperVoice.load(PIPER_MODEL)
     return _piper_voice
+
+
+@bp.context_processor
+def _inject_current_user():
+    return {"current_user": session.get("user")}
+
+
+@bp.before_request
+def _require_user():
+    if request.path.startswith("/static/"):
+        return
+    if request.endpoint in UTILISATEUR_ENDPOINTS:
+        return
+    user = session.get("user")
+    if user and user in _user_names(_load_users()):
+        return
+    session.pop("user", None)
+    return redirect(url_for("main.utilisateur"))
+
+
+@bp.after_request
+def _log_nav(response):
+    if request.path.startswith("/static/"):
+        return response
+    if request.endpoint == "main.log_event":
+        return response
+    user = session.get("user")
+    if user:
+        _log_event(user, "nav", route=request.path, method=request.method)
+    return response
+
+
+@bp.route("/utilisateur", methods=["GET", "POST"])
+def utilisateur():
+    users = _load_users()
+    if request.method == "POST":
+        nom = request.form.get("nom", "").strip()
+        if nom:
+            if nom not in _user_names(users):
+                users.append({"name": nom, "created": datetime.now().strftime("%Y-%m-%d %H:%M")})
+                _save_users(users)
+            session["user"] = nom
+            session.permanent = True
+            return redirect(url_for("main.docs_view"))
+        return redirect(url_for("main.utilisateur"))
+    return render_template("utilisateur.html", users=users)
+
+
+@bp.route("/utilisateur/<nom>/supprimer", methods=["POST"])
+def utilisateur_supprimer(nom):
+    if nom == "admin":
+        abort(400)
+    users = [u for u in _load_users() if u["name"] != nom]
+    _save_users(users)
+    if session.get("user") == nom:
+        session.pop("user", None)
+    return redirect(url_for("main.utilisateur"))
+
+
+@bp.route("/utilisateur/<nom>/renommer", methods=["POST"])
+def utilisateur_renommer(nom):
+    nouveau = request.form.get("nouveau", "").strip()
+    users = _load_users()
+    names = _user_names(users)
+    if nouveau and nom in names and nouveau not in names:
+        for u in users:
+            if u["name"] == nom:
+                u["name"] = nouveau
+        _save_users(users)
+        if session.get("user") == nom:
+            session["user"] = nouveau
+    return redirect(url_for("main.utilisateur"))
+
+
+@bp.route("/api/log-event", methods=["POST"])
+def log_event():
+    user = session.get("user")
+    if not user:
+        abort(403)
+    data = request.get_json(silent=True) or {}
+    activite = str(data.get("activite", ""))[:80]
+    event = str(data.get("event", ""))[:80]
+    detail = data.get("detail")
+    if detail is not None:
+        detail = str(detail)[:200]
+    _log_event(user, "event", activite=activite, event=event, detail=detail)
+    return ("", 204)
 
 
 @bp.route("/")
@@ -249,6 +377,7 @@ def retour_terrain_save():
     retours = _load_retours()
     retours.append({
         "date": datetime.now().strftime("%Y-%m-%d %H:%M"),
+        "user": session.get("user"),
         "activite": activite,
         "engagement": engagement,
         "reglages": reglages,

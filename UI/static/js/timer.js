@@ -84,6 +84,7 @@ const TimerActivity = (function () {
     }, 2000);
     btnStart.textContent = "Recommencer";
     showPicker(true);
+    ActivityCore.logEvent("fin", duration);
   }
 
   function tick() {
@@ -103,6 +104,7 @@ const TimerActivity = (function () {
     tickId = setInterval(tick, 1000);
     btnStart.textContent = "Pause";
     showPicker(false);
+    ActivityCore.logEvent("demarrage", duration);
   }
 
   function pause() {
