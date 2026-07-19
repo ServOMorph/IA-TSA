@@ -1,0 +1,36 @@
+# IA-TSA
+
+> Projet de recherche appliquée explorant l'usage de l'intelligence artificielle locale comme outil de soutien et d'accompagnement individuel pour les personnes atteintes de troubles du spectre autistique (TSA) en contexte éducatif. Propose un explorateur de documents de recherche et quatre activités interactives adaptées (cause-effet, choix, timer visuel, synthèse vocale locale Piper TTS), avec une traçabilité d'utilisation conforme au RGPD.
+
+## Stack
+- **Backend** : Python >=3.11, Flask >=3.0, Piper TTS, Markdown
+- **Frontend** : Jinja2, HTML5, CSS vanilla (Design System SéréniaTech, mode sombre et reduced-motion), JavaScript vanilla
+- **Synthèse vocale** : Piper TTS s'exécutant entièrement en local (voix `fr_FR-siwis-medium` téléchargée localement dans `voices/`).
+
+## Points d'entrée
+- `run.py` — Point d'entrée principal pour démarrer le serveur de développement Flask (port 4110).
+- `UI/__init__.py` — Configuration de l'application Flask, gestion de la durée de vie des sessions et enregistrement du Blueprint principal.
+- `UI/routes.py` — Ensemble des routes HTTP de l'application (pages des activités, API de synthèse vocale, journalisation, retours terrain, explorateur de documents).
+- `ollama_call.py` — Script d'aide pour déléguer les appels d'agents locaux à Ollama (modèle `gemma4:e4b` par défaut).
+
+## Architecture & Fonctionnalités clés
+1. **Activités d'Accompagnement** :
+   - *Cause-effet pur* : réaction immédiate visuelle et sonore à toute action clavier/souris sans stimulus parasite.
+   - *Choix entre deux* : Proto-CAA (aide à la décision). L'apprenant cible une zone, l'accompagnant valide pour animer.
+   - *Timer visuel* : Sablier circulaire réglable (1 à 15 min) pour faciliter la transition et l'attente en réduisant l'anxiété.
+   - *Écris et écoute* : Synthèse vocale locale autonome générée par Piper TTS sous forme de flux WAV dynamique.
+2. **Explorateur de Documents** :
+   - Rendu HTML dynamique à partir des fichiers Markdown situés dans `docs/` (pédagogie, références, sites).
+3. **Session utilisateur & Logging (Conformité RGPD)** :
+   - Sélection d'un utilisateur (éducateur/accompagnant) obligatoire à l'ouverture de l'application.
+   - Journalisation des flux de navigation et des actions dans les activités dans `data/logs/` (format `.jsonl`).
+   - Saisie et enregistrement des retours terrain dans `data/retours_terrain.json`.
+   - Exclusion stricte de toute donnée personnelle, comportementale ou nominative concernant les enfants.
+
+## État actuel
+Implémentation de la phase de sélection utilisateur et du logging d'utilisation mensuel terminée et fonctionnelle. Piper TTS configuré et validé en local.
+
+## Liens
+- Dépôt : https://github.com/ServOMorph/IA-TSA
+- Licence : MIT (voir `LICENSE`)
+- Spécifications : `roadmap.md`
