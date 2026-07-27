@@ -20,6 +20,10 @@ Le projet propose une suite d'applications et de ressources accessibles via une 
 3. **Retours terrain** : Interface d'observation permettant à l'accompagnant de consigner l'engagement (engagé, neutre, retrait), les réglages utilisés et ses notes après chaque séance.
 4. **Session utilisateur & Traçabilité** : Identification simple de l'éducateur à l'ouverture avec journalisation locale de l'utilisation (navigation et événements fins) à des fins d'analyse.
 
+## En cours
+
+Conception d'un premier jeu **dyadique** (adulte + jeune) — "Regarde où je regarde" : mécanique de balayage automatique des zones, validation par une touche unique côté jeune (compatible accès contacteur), cible pédagogique l'attention conjointe et l'alternance des rôles initiateur/suiveur. Détails dans `roadmap.md` et `docs/reference/jeux_video_tsa.md`.
+
 ## Architecture & Concepts clés
 
 - **Respect strict du RGPD** : Aucune donnée personnelle, comportementale, nominative ou de santé concernant les enfants n'est collectée ou transmise. Les retours terrain et les logs de parcours de l'éducateur sont stockés localement dans le dossier `data/` (exclu du suivi de version Git).

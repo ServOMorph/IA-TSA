@@ -1,6 +1,6 @@
 # Roadmap — IA-TSA
 
-## Phase : Sélection utilisateur + logging horodaté
+## Phase : Sélection utilisateur + logging horodaté [FAIT]
 
 ### Objectif
 À l'ouverture de l'UI, choisir un utilisateur (éducateur/admin) avant tout accès aux
@@ -93,3 +93,89 @@ individuel des enfants — RGPD : aucune donnée enfant/établissement dans les 
 - Tester le flux complet (sélection, navigation, activités, retour terrain) en séance.
 - Écran de consultation des logs dans l'UI : reporté à une itération ultérieure
   (lecture directe des fichiers `data/logs/*.jsonl` suffisante pour l'instant).
+
+---
+
+## Phase : Jeu dyadique "Regarde où je regarde" (balayage) [EN COURS]
+
+### Objectif
+Premier jeu à deux joueurs (adulte + jeune) du projet, comblant l'angle mort identifié
+le 2026-07-27 : toutes les activités existantes sont solitaires (adulte pilote/observe,
+ne joue pas). Cible pédagogique nommée : attention conjointe et alternance des rôles
+initiateur/suiveur — mécanique la mieux soutenue par la littérature consultée
+(voir [docs/reference/jeux_video_tsa.md](docs/reference/jeux_video_tsa.md)).
+
+Contrainte terrain déterminante (mémorisée le 2026-07-27, voir `.claude/memory.md`) :
+les jeunes ne sont pas autonomes avec la souris → entrée jeune limitée à une seule
+touche (accès contacteur/switch), ce qui exclut toute variante à choix multiple
+côté jeune. D'où le choix du **balayage automatique** : les zones s'éclairent l'une
+après l'autre en boucle, le jeune appuie sa touche unique quand le balayage atteint
+la zone désignée par l'adulte.
+
+### 1. Mécanique de jeu
+- Grille de zones (2 puis 4 selon palier), une seule active visuellement à la fois.
+- Rôle "désignateur" (débute par l'adulte) : marque une zone (clic ou touche adulte) —
+  contour épais + son propre, marquage durable (ne s'éteint pas).
+- Balayage automatique en boucle continue sur toutes les zones, vitesse réglable.
+- Rôle "suiveur" (débute par le jeune) : une seule touche (Espace par défaut,
+  configurable), appui valide seulement si le balayage est sur la zone marquée.
+- Match : marquages fusionnent, animation + son communs (seul moment "célébré").
+- Non-match : aucune pénalité, aucun compteur d'échec, le balayage continue sans
+  interruption, la zone reste marquée, le jeune peut retenter au tour suivant.
+- Pas de fin de boucle automatique, pas de limite de tentatives — cohérent avec le
+  principe projet "pas de minuterie implicite" (docs/pedagogie/projet_pedagogique.md §3).
+- Inversion des rôles (palier 5) : le jeune désigne une zone de son choix (aucune
+  "bonne" zone), l'adulte doit la rejoindre au balayage.
+
+### 2. Paliers de progression (déclenchés manuellement par l'adulte, jamais par timer)
+1. 2 zones, balayage très lent
+2. 2 zones, balayage plus rapide
+3. 4 zones (disposition croix)
+4. 4 zones, la zone marquée cesse d'être visible pendant le balayage (mémoire)
+5. Inversion des rôles activée
+
+### 3. Réglages exposés (panel_extra du socle activite_base.html)
+- Vitesse de balayage (paramètre le plus déterminant à ajuster en séance)
+- Nombre de zones (2 / 4)
+- Pause entre deux cycles de balayage
+- Anti-rebond : ignorer les appuis répétés à moins de N ms (contacteur maintenu
+  ne doit pas générer de rafale d'appuis)
+- Touche du jeune configurable
+- Réglages socle existants réutilisés tels quels : son, intensité, taille, mode calme
+
+### 4. Fichiers impactés
+- `UI/routes.py` : nouvelle route `/activites/regarde-ou-je-regarde`
+  (suivre le patron des routes `/activites/*` existantes).
+- `UI/templates/activite_regarde.html` : nouveau template, étend `activite_base.html`,
+  bloc `panel_extra` pour les réglages spécifiques.
+- `UI/static/js/regarde.js` : nouveau script d'activité.
+- `UI/static/js/activity-core.js` : évaluer si la logique de balayage/palier/tour
+  est assez générique pour vivre dans un module partagé réutilisable par de futures
+  activités à tour de rôle, ou si elle reste locale à `regarde.js` pour cette
+  première itération (trancher en développant, ne pas sur-abstraire prématurément).
+- `UI/templates/activites.html` : ajouter la tuile du nouveau jeu au catalogue.
+- Logging : réutiliser `ActivityCore.logEvent()` pour les événements clés (désignation,
+  match, changement de palier, inversion de rôle) — aucun contenu enfant, RGPD inchangé.
+
+### 5. Contraintes héritées du projet
+- Prévisibilité stricte : mapping zone/touche fixe, aucun aléatoire visible.
+- Pas d'échec punitif : jamais de croix rouge, buzzer, ou décompte de tentatives ratées.
+- Mode calme et réglages persistés en localStorage, comme les 4 activités existantes.
+- RGPD : aucune donnée enfant dans le code, les logs, ou les commits.
+
+### 6. Tests avant [FAIT]
+- Test fonctionnel de la mécanique (désignation, balayage, match, non-match,
+  inversion) sur les 5 paliers.
+- Test en séance réelle avec un jeune : le palier 1 (2 zones, balayage très lent)
+  peut être un plafond durable pour certains profils et non une simple introduction
+  (réserve notée le 2026-07-27) — noter l'observation dans l'onglet Terrain plutôt
+  que de forcer la progression.
+- Vérifier l'anti-rebond avec un appui maintenu (simulation contacteur).
+
+### 7. Limite assumée
+Cette conception s'appuie sur une synthèse de littérature ponctuelle et non revue par
+les pairs (docs/reference/jeux_video_tsa.md). Le jeu est un support d'interaction pour
+l'accompagnant, pas une intervention validée cliniquement — à ne jamais présenter comme telle.
+
+**⏸ Checkpoint** — Demander à l'utilisateur de faire `/compact` avant de continuer.
+Attendre sa réponse écrite. Ne pas commencer la phase suivante sans confirmation.
