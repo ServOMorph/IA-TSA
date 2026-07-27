@@ -14,6 +14,29 @@
 </div>
 {% endblock %}
 
+{% block regles_titre %}Règles — Choix entre deux{% endblock %}
+
+{% block regles %}
+<p>L'adulte propose, le jeune choisit, l'adulte valide.</p>
+
+<h3>Déroulement</h3>
+<ol>
+  <li>Deux zones sont affichées : un cercle à gauche, un carré à droite.</li>
+  <li>Le jeune indique son choix par n'importe quel moyen : regard, geste, vocalise, pointage.</li>
+  <li>L'adulte valide en cliquant sur la zone choisie, ou avec <kbd>←</kbd> / <kbd>→</kbd> (ou <kbd>1</kbd> / <kbd>2</kbd>).</li>
+  <li>La zone choisie s'anime avec son son propre, l'autre s'estompe.</li>
+</ol>
+
+<h3>Bon à savoir</h3>
+<ul>
+  <li>Il n'y a pas de bonne réponse : les deux zones sont équivalentes, seul compte l'acte de choisir.</li>
+  <li>Les formes et couleurs peuvent représenter n'importe quelle paire réelle (deux activités, deux objets, deux lieux) — c'est une première étape vers la communication par pictogrammes.</li>
+  <li>Attendre le choix du jeune avant de valider : ne pas anticiper à sa place.</li>
+</ul>
+
+<p class="regles-note">Observer si le jeune initie le choix seul ou s'il attend une sollicitation. À noter dans l'onglet Terrain.</p>
+{% endblock %}
+
 {% block script %}
 <script src="{{ url_for('static', filename='js/choix.js') }}"></script>
 {% endblock %}

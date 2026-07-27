@@ -1,0 +1,111 @@
+{% extends "activite_base.html" %}
+
+{% block title %}Regarde où je regarde — IA-TSA{% endblock %}
+{% block slug %}regarde-ou-je-regarde{% endblock %}
+
+{% block stage %}
+<div class="regarde-status" id="regarde-status"></div>
+
+<div class="regarde-grid">
+  <button class="regarde-zone" data-pos="haut" data-tone="392">
+    <span class="regarde-shape regarde-shape-circle"></span>
+  </button>
+  <button class="regarde-zone" data-pos="droite" data-tone="523">
+    <span class="regarde-shape regarde-shape-square"></span>
+  </button>
+  <button class="regarde-zone" data-pos="bas" data-tone="659">
+    <span class="regarde-shape regarde-shape-diamond"></span>
+  </button>
+  <button class="regarde-zone" data-pos="gauche" data-tone="294">
+    <span class="regarde-shape regarde-shape-triangle"></span>
+  </button>
+</div>
+{% endblock %}
+
+{% block regles_titre %}Règles — Regarde où je regarde{% endblock %}
+
+{% block regles %}
+<p>Jeu à deux : un adulte et un jeune, sur le même clavier.</p>
+
+<h3>Déroulement d'un tour</h3>
+<ol>
+  <li>Les zones s'allument l'une après l'autre, en boucle automatique (le balayage).</li>
+  <li>L'adulte appuie sur <kbd>Entrée</kbd> quand le balayage éclaire la zone qu'il veut désigner. Cette zone reste marquée (contour lumineux qui pulse).</li>
+  <li>Le jeune appuie sur <kbd>Espace</kbd> quand le balayage revient sur la zone marquée. Bon moment : animation et son de réussite. Mauvais moment : rien ne se passe, le balayage continue, il retente au tour suivant.</li>
+  <li>Après une réussite, le marquage disparaît : l'adulte peut désigner une nouvelle zone.</li>
+</ol>
+
+<h3>Les 5 paliers</h3>
+<p>À changer à la main dans les réglages (⚙️), selon ce que vous observez. Jamais de progression automatique.</p>
+<ul>
+  <li><strong>1</strong> — 2 zones, balayage très lent</li>
+  <li><strong>2</strong> — 2 zones, plus rapide</li>
+  <li><strong>3</strong> — 4 zones en croix</li>
+  <li><strong>4</strong> — 4 zones, la zone marquée devient invisible après un instant (mémoire)</li>
+  <li><strong>5</strong> — rôles inversés : le jeune désigne avec <kbd>Espace</kbd> (aucune zone n'est « la bonne »), l'adulte rejoint avec <kbd>Entrée</kbd></li>
+</ul>
+
+<h3>Bon à savoir</h3>
+<ul>
+  <li>Aucun échec, aucun score, aucune limite de tentatives : rater un passage ne coûte rien.</li>
+  <li>Les deux touches restent actives même quand le panneau de réglages est ouvert.</li>
+  <li>La souris ne sert qu'à l'adulte, pour les réglages — jamais pour jouer.</li>
+</ul>
+
+<p class="regles-note">Ce jeu est un support d'interaction pour l'accompagnant, pas une intervention validée cliniquement.</p>
+{% endblock %}
+
+{% block panel_extra %}
+<div class="panel-row panel-row-col">
+  <span>Palier</span>
+  <div class="visual-picker" id="palier-picker">
+    <button class="visual-opt" data-palier="1">1 — 2 zones, très lent</button>
+    <button class="visual-opt" data-palier="2">2 — 2 zones, plus rapide</button>
+    <button class="visual-opt" data-palier="3">3 — 4 zones (croix)</button>
+    <button class="visual-opt" data-palier="4">4 — 4 zones, mémoire</button>
+    <button class="visual-opt" data-palier="5">5 — inversion des rôles</button>
+  </div>
+</div>
+
+<label class="panel-row">
+  <span>Vitesse de balayage</span>
+  <input type="range" id="set-vitesse" min="300" max="2000" step="50">
+</label>
+
+<div class="panel-row panel-row-col">
+  <span>Nombre de zones</span>
+  <div class="visual-picker" id="zones-picker">
+    <button class="visual-opt" data-zones="2">2 zones</button>
+    <button class="visual-opt" data-zones="4">4 zones</button>
+  </div>
+</div>
+
+<label class="panel-row">
+  <span>Pause entre deux cycles</span>
+  <input type="range" id="set-pause" min="0" max="2000" step="50">
+</label>
+
+<label class="panel-row">
+  <span>Anti-rebond (contacteur)</span>
+  <input type="range" id="set-antirebond" min="100" max="800" step="20">
+</label>
+
+<label class="panel-row">
+  <span>Mode mémoire (marquage caché)</span>
+  <input type="checkbox" id="set-memoire">
+</label>
+
+<label class="panel-row">
+  <span>Inverser les rôles</span>
+  <input type="checkbox" id="set-inversion">
+</label>
+
+<div class="panel-row">
+  <span>Touches</span>
+  <span class="regarde-keys-info">Adulte : Entrée · Jeune : Espace</span>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/regarde.js') }}"></script>
+{% endblock %}

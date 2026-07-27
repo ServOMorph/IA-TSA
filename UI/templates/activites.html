@@ -20,7 +20,7 @@
 
   <div class="activity-cards">
     {% for a in activites %}
-    <a class="activity-card" href="{{ url_for('main.' + a.endpoint) }}" target="_blank" rel="noopener">
+    <div class="activity-card">
       <div class="activity-card-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
       </div>
@@ -29,11 +29,61 @@
         <p class="activity-card-desc">{{ a.desc }}</p>
         <span class="activity-card-profil">{{ a.profil }}</span>
       </div>
-      <svg class="activity-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-      </svg>
-    </a>
+      {% if theorie.get(a.slug) %}
+      <button class="activity-card-theorie" data-theorie="{{ a.slug }}" title="Fondement théorique">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <span>Théorie</span>
+      </button>
+      {% endif %}
+      <a class="activity-card-open" href="{{ url_for('main.' + a.endpoint) }}" target="_blank" rel="noopener">
+        Ouvrir
+        <svg class="activity-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+    </div>
     {% endfor %}
   </div>
 </div>
+
+{% for a in activites %}{% set t = theorie.get(a.slug) %}{% if t %}
+<div class="theorie-overlay" id="theorie-{{ a.slug }}" hidden>
+  <div class="theorie-modal" role="dialog" aria-modal="true">
+    <h2 class="theorie-titre">{{ a.name }}</h2>
+    <p class="theorie-cible"><strong>Cible visée :</strong> {{ t.cible }}</p>
+    <h3>Sur quoi cela s'appuie</h3>
+    <ul>
+      {% for f in t.fondement %}<li>{{ f }}</li>{% endfor %}
+    </ul>
+    <h3>Réserve</h3>
+    <p class="theorie-reserve">{{ t.reserve }}</p>
+    <p class="theorie-source">Source : {{ t.source }}</p>
+    <button class="theorie-close">Fermer</button>
+  </div>
+</div>
+{% endif %}{% endfor %}
+
+<script>
+(function () {
+  function toggle(slug, show) {
+    var el = document.getElementById("theorie-" + slug);
+    if (el) el.hidden = !show;
+  }
+  document.querySelectorAll(".activity-card-theorie").forEach(function (btn) {
+    btn.addEventListener("click", function () { toggle(btn.dataset.theorie, true); });
+  });
+  document.querySelectorAll(".theorie-overlay").forEach(function (ov) {
+    var slug = ov.id.replace("theorie-", "");
+    ov.querySelector(".theorie-close").addEventListener("click", function () { toggle(slug, false); });
+    ov.addEventListener("click", function (e) { if (e.target === ov) toggle(slug, false); });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    document.querySelectorAll(".theorie-overlay:not([hidden])").forEach(function (ov) { ov.hidden = true; });
+  });
+})();
+</script>
 {% endblock %}

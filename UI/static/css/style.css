@@ -638,6 +638,122 @@ button { background: none; border: none; cursor: pointer; font: inherit; color: 
   color: var(--color-text-muted);
 }
 
+.activity-card-theorie,
+.activity-card-open {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 8px 14px;
+  border-radius: var(--radius-lg);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background var(--transition-fast);
+}
+
+.activity-card-theorie {
+  background: transparent;
+  color: var(--color-text-muted);
+  border-color: var(--color-bg-alt);
+}
+.activity-card-theorie:hover { background: var(--color-bg-alt); color: var(--color-text); }
+.activity-card-theorie svg { width: 16px; height: 16px; }
+
+.activity-card-open {
+  background: var(--color-primary-alpha);
+  color: var(--color-primary-dark);
+}
+.activity-card-open:hover { background: var(--color-primary); color: #fff; }
+
+/* ── Modale théorie ──────────────────────────────────────────────────── */
+.theorie-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+}
+.theorie-overlay[hidden] { display: none; }
+
+.theorie-modal {
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  width: min(680px, 100%);
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+}
+
+.theorie-titre {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--color-text);
+  margin-bottom: var(--space-md);
+}
+
+.theorie-modal h3 {
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-primary-dark);
+  margin: var(--space-lg) 0 var(--space-sm);
+}
+
+.theorie-modal ul {
+  margin: 0 0 var(--space-md) var(--space-lg);
+  list-style: disc;
+}
+.theorie-modal li {
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
+  line-height: 1.6;
+}
+
+.theorie-cible {
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  background: var(--color-primary-alpha);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+}
+
+.theorie-reserve {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  border-left: 3px solid var(--color-primary);
+  padding-left: var(--space-md);
+  line-height: 1.6;
+}
+
+.theorie-source {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-lg);
+  font-family: var(--font-mono, monospace);
+}
+
+.theorie-close {
+  margin-top: var(--space-lg);
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: var(--radius-lg);
+  background: var(--color-primary);
+  color: #fff;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.theorie-close:hover { background: var(--color-primary-dark); }
+
 /* ── Retour terrain ──────────────────────────────────────────────────── */
 .rt-warning {
   background: rgba(237,137,54,0.12);

@@ -3,6 +3,29 @@
 {% block title %}Touche → ça réagit — IA-TSA{% endblock %}
 {% block slug %}cause-effet{% endblock %}
 
+{% block regles_titre %}Règles — Touche → ça réagit{% endblock %}
+
+{% block regles %}
+<p>Activité solitaire : le jeune agit, l'adulte observe et accompagne.</p>
+
+<h3>Déroulement</h3>
+<ul>
+  <li><kbd>Espace</kbd> → un cercle apparaît, avec un son aigu.</li>
+  <li><kbd>Entrée</kbd> → un carré apparaît, avec un son grave.</li>
+  <li><kbd>Ctrl</kbd> → un losange apparaît, avec un son très aigu.</li>
+  <li>Un clic ou un tap sur l'écran produit l'effet « cercle », à l'endroit touché.</li>
+</ul>
+
+<h3>Bon à savoir</h3>
+<ul>
+  <li>Toute autre touche est volontairement ignorée : seules ces trois touches produisent un effet, pour que le lien action → réaction reste net.</li>
+  <li>L'écran reste calme entre deux actions : rien ne bouge tant que le jeune n'agit pas.</li>
+  <li>Il n'y a ni but, ni score, ni fin : l'objectif est de découvrir « mon action produit un effet ».</li>
+</ul>
+
+<p class="regles-note">Observer combien de temps le jeune reste engagé et s'il repère la différence entre les trois touches. À noter dans l'onglet Terrain.</p>
+{% endblock %}
+
 {% block script %}
 <script src="{{ url_for('static', filename='js/cause-effet.js') }}"></script>
 {% endblock %}

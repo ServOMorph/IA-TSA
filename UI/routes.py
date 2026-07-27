@@ -66,9 +66,104 @@ ACTIVITES = [
                 "Entrée ou clique sur le bouton : le mot est lu à voix haute.",
         "profil": "Association mot écrit / mot entendu, motricité fine au clavier",
     },
+    {
+        "slug": "regarde-ou-je-regarde",
+        "endpoint": "activite_regarde",
+        "name": "Regarde où je regarde",
+        "desc": "Jeu à deux : l'accompagnant désigne une zone, l'apprenant valide au "
+                "bon moment pendant le balayage automatique. 5 paliers, contacteur "
+                "une touche.",
+        "profil": "Jeu dyadique accompagnant/apprenant, attention conjointe, alternance des rôles",
+    },
 ]
 
 ENGAGEMENTS = ["engage", "neutre", "retrait"]
+
+THEORIE = {
+    "cause-effet": {
+        "cible": "Établir le lien de causalité « mon action produit un effet »",
+        "fondement": [
+            "Le numérique convient au TSA pour des raisons structurelles : prévisibilité de la "
+            "machine, absence de charge sociale et de jugement, réaction constante et immédiate "
+            "(projet_pedagogique.md §2, ancrage HAS 2026).",
+            "Le mapping fixe action → effet est la piste la mieux soutenue par la littérature : "
+            "une correspondance stable entre action et réaction réduit l'anxiété et facilite "
+            "l'anticipation. Trois touches actives seulement (Espace, Entrée, Ctrl), toute autre "
+            "touche est ignorée pour éviter le bruit d'interaction.",
+            "La variation progressive du stimulus a été explicitement écartée : les enfants TSA "
+            "présentent une habituation neuronale plus lente voire absente aux stimuli répétés, "
+            "et les guides de conception recommandent la constance plutôt que la nouveauté.",
+        ],
+        "reserve": "Le désengagement observé en séance ne relève probablement pas d'une "
+                   "habituation classique — plutôt fatigue ou pause sensorielle volontaire.",
+        "source": "docs/reference/analyses/analyse_activite_cause_effet.md",
+    },
+    "choix-a-deux": {
+        "cible": "Exercer la décision intentionnelle et la communication par le choix (proto-CAA)",
+        "fondement": [
+            "Première étape vers la communication alternative et augmentée : la dichotomie "
+            "gauche/droite peut représenter n'importe quelle paire réelle (activité, objet, lieu), "
+            "les formes et couleurs étant substituables selon le profil.",
+            "Les ressources sur les dispositifs de communication alternative soulignent l'intérêt "
+            "de motifs moteurs cohérents et d'une charge cognitive minimisée dans la conception "
+            "des interactions.",
+            "Aucune bonne réponse : les deux zones sont équivalentes. Seul l'acte de choisir est "
+            "l'objet de l'activité, ce qui exclut toute connotation d'échec.",
+        ],
+        "reserve": "L'adulte valide le choix — le risque est d'anticiper à la place du jeune et "
+                   "de transformer un choix en simple confirmation.",
+        "source": "docs/pedagogie/projet_pedagogique.md §4.2",
+    },
+    "timer": {
+        "cible": "Matérialiser l'attente et rendre les transitions prévisibles",
+        "fondement": [
+            "Recommandation HAS §3.5 : rendre visible ce qui va se passer avant et après une "
+            "activité, matérialiser la durée via des supports visuels.",
+            "La prévisibilité et la structure sont l'un des trois principes fondateurs retenus "
+            "pour tout le projet — réduire les surprises, rendre visible ce qui va se passer.",
+            "Cinq visuels sélectionnables car les profils sont hétérogènes : l'adaptation au "
+            "profil de chaque enfant n'est pas un confort mais une condition d'efficacité.",
+        ],
+        "reserve": "L'outil rend la durée visible, pas la suite prévisible : ce qui se passe "
+                   "après le timer doit être annoncé à l'oral par l'accompagnant.",
+        "source": "docs/pedagogie/projet_pedagogique.md §4.3",
+    },
+    "ecrire-ecoute": {
+        "cible": "Associer le mot écrit au mot entendu, exercer la motricité fine au clavier",
+        "fondement": [
+            "Le support visuel est natif au numérique et la machine ne porte aucun jugement sur "
+            "la production : l'enfant peut explorer librement le lien lettres/sons.",
+            "Synthèse vocale neuronale exécutée localement (Piper) plutôt qu'une API navigateur, "
+            "pour un rendu plus proche d'une voix humaine et sans transmission externe.",
+            "Toute saisie est lisible, y compris les suites de lettres sans signification : "
+            "l'activité n'impose pas de bonne réponse.",
+        ],
+        "reserve": "Intérêt pédagogique et qualité perçue de la voix non encore évalués en "
+                   "séance réelle.",
+        "source": "docs/pedagogie/projet_pedagogique.md §4, décision du 2026-07-08",
+    },
+    "regarde-ou-je-regarde": {
+        "cible": "Attention conjointe et alternance des rôles initiateur/suiveur",
+        "fondement": [
+            "Les formats collaboratifs sont plus efficaces que les formats compétitifs. Les jeux "
+            "à tour de rôle enseignent la réciprocité ; les jeux multijoueurs construisent "
+            "naturellement l'attention conjointe, les joueurs imitant le comportement du partenaire.",
+            "Une revue systématique de 9 interventions rapporte une amélioration significative sur "
+            "au moins un construit lié aux compétences sociales dans 100 % des études, l'attention "
+            "conjointe et la direction du regard faisant partie des domaines touchés.",
+            "Le balayage automatique découle d'une contrainte terrain : les jeunes n'étant pas "
+            "autonomes à la souris, l'entrée est limitée à une touche unique (contacteur). Sans "
+            "balayage, le jeu dégénérerait en cause-effet à deux sans exigence attentionnelle.",
+            "Aucun échec punitif, aucune limite de tentatives, progression par paliers déclenchée "
+            "manuellement par l'adulte et jamais par un timer.",
+        ],
+        "reserve": "La revue critique de Walsh, Linehan & Ryan (2025, Autism) tempère fortement "
+                   "l'optimisme des revues antérieures : cibles mal définies, mesures hétérogènes, "
+                   "transfert vers la vie réelle non démontré, petits échantillons. Ce jeu est un "
+                   "support d'interaction pour l'accompagnant, jamais une intervention validée.",
+        "source": "docs/reference/jeux_video_tsa.md",
+    },
+}
 
 
 def _build_docs_tree(path, rel=""):
@@ -303,7 +398,9 @@ def docs_raw(filename):
 
 @bp.route("/activites")
 def activites():
-    return render_template("activites.html", activites=ACTIVITES, active="activites")
+    return render_template(
+        "activites.html", activites=ACTIVITES, theorie=THEORIE, active="activites",
+    )
 
 
 @bp.route("/activites/cause-effet")
@@ -324,6 +421,11 @@ def activite_timer():
 @bp.route("/activites/ecrire-ecoute")
 def activite_ecoute():
     return render_template("activite_ecoute.html")
+
+
+@bp.route("/activites/regarde-ou-je-regarde")
+def activite_regarde():
+    return render_template("activite_regarde.html")
 
 
 @bp.route("/api/tts", methods=["POST"])

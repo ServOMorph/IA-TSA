@@ -20,6 +20,29 @@
 </div>
 {% endblock %}
 
+{% block regles_titre %}Règles — Écris et écoute{% endblock %}
+
+{% block regles %}
+<p>Le jeune écrit, la machine lit à voix haute.</p>
+
+<h3>Déroulement</h3>
+<ol>
+  <li>Taper un mot, une lettre ou une suite de lettres dans le champ.</li>
+  <li>Appuyer sur <kbd>Entrée</kbd> ou sur le bouton haut-parleur : le texte est lu à voix haute et s'ajoute à la liste.</li>
+  <li>Chaque ligne de la liste peut être réécoutée (bouton haut-parleur) ou corrigée (bouton crayon).</li>
+  <li>En correction : <kbd>Entrée</kbd> valide, <kbd>Échap</kbd> annule.</li>
+</ol>
+
+<h3>Bon à savoir</h3>
+<ul>
+  <li>La voix est générée localement sur le poste : rien n'est envoyé sur Internet.</li>
+  <li>Le texte saisi n'est jamais enregistré dans les journaux d'usage.</li>
+  <li>Tout est lisible, y compris les suites de lettres sans signification : c'est utile pour explorer le lien entre lettres et sons.</li>
+</ul>
+
+<p class="regles-note">Si aucune voix ne sort, le modèle vocal n'est pas installé sur ce poste — voir le README du projet.</p>
+{% endblock %}
+
 {% block script %}
 <script src="{{ url_for('static', filename='js/ecoute.js') }}"></script>
 {% endblock %}

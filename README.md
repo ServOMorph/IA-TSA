@@ -6,7 +6,9 @@ Ce dépôt implémente une interface web locale et sécurisée développée en *
 
 ## Objectif
 
-Explorer et concevoir des activités numériques adaptées (cause-effet, choix, structuration du temps, association mot-son avec synthèse vocale locale) pour soutenir le développement cognitif et la communication d'apprenants avec TSA en salle informatique.
+Explorer et concevoir des activités numériques adaptées (cause-effet, choix, structuration du temps, association mot-son avec synthèse vocale locale, jeu coopératif à deux) pour soutenir le développement cognitif et la communication d'apprenants avec TSA en salle informatique.
+
+Contrainte de conception déterminante : les apprenants n'étant pas autonomes avec la souris, **toute activité est pilotable intégralement au clavier** (ou par contacteur mappé sur une touche) côté apprenant. La souris reste réservée à l'accompagnant.
 
 ## Fonctionnalités & Activités
 
@@ -17,12 +19,16 @@ Le projet propose une suite d'applications et de ressources accessibles via une 
    - **Choix entre deux** : Aide à la décision et à la communication (Proto-CAA). L'apprenant sélectionne une option et l'accompagnant valide pour lancer l'animation.
    - **Timer visuel** : Sablier circulaire dynamique matérialisant l'attente et facilitant les transitions pour réduire l'anxiété.
    - **Écris et écoute** : Synthèse vocale locale via **Piper TTS**. L'apprenant tape un mot ou une suite de lettres pour l'écouter.
+   - **Regarde où je regarde** : Premier jeu **dyadique** (adulte + jeune) du projet. Les zones s'éclairent en boucle (balayage automatique) ; l'adulte désigne une zone avec `Entrée`, le jeune la valide avec `Espace` au bon moment. 5 paliers de difficulté déclenchés manuellement, sans échec ni score. Cible : attention conjointe et alternance des rôles.
 3. **Retours terrain** : Interface d'observation permettant à l'accompagnant de consigner l'engagement (engagé, neutre, retrait), les réglages utilisés et ses notes après chaque séance.
 4. **Session utilisateur & Traçabilité** : Identification simple de l'éducateur à l'ouverture avec journalisation locale de l'utilisation (navigation et événements fins) à des fins d'analyse.
+5. **Documentation intégrée** : Chaque activité expose un bouton **Règles du jeu** expliquant son fonctionnement à l'accompagnant, et le catalogue propose pour chacune une fiche **Théorie** résumant la cible visée, les fondements issus de `docs/` et les réserves méthodologiques.
 
 ## En cours
 
-Conception d'un premier jeu **dyadique** (adulte + jeune) — "Regarde où je regarde" : mécanique de balayage automatique des zones, validation par une touche unique côté jeune (compatible accès contacteur), cible pédagogique l'attention conjointe et l'alternance des rôles initiateur/suiveur. Détails dans `roadmap.md` et `docs/reference/jeux_video_tsa.md`.
+Le jeu dyadique "Regarde où je regarde" est **codé et validé par tests navigateur automatisés**. Restent à faire : l'essai en séance réelle et la vérification de l'anti-rebond sur contacteur physique. Détails dans `roadmap.md` et `docs/reference/jeux_video_tsa.md`.
+
+Aucune activité n'a encore été éprouvée en séance réelle — c'est la priorité du projet.
 
 ## Architecture & Concepts clés
 

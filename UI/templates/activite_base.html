@@ -23,6 +23,13 @@
         <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/>
       </svg>
     </button>
+    <button class="activity-btn" id="btn-regles" title="Règles du jeu" aria-label="Règles du jeu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+    </button>
     <button class="activity-btn" id="btn-settings" title="Réglages" aria-label="Réglages">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="12" cy="12" r="3"/>
@@ -57,6 +64,18 @@
     {% block panel_extra %}{% endblock %}
 
     <button class="panel-close" id="panel-close">Fermer</button>
+  </div>
+
+  <div class="regles-overlay" id="regles-overlay" hidden>
+    <div class="regles-modal" role="dialog" aria-modal="true" aria-labelledby="regles-titre">
+      <h2 class="regles-titre" id="regles-titre">{% block regles_titre %}Règles{% endblock %}</h2>
+      <div class="regles-body">
+        {% block regles %}
+        <p>Aucune règle particulière : l'activité réagit à toute action.</p>
+        {% endblock %}
+      </div>
+      <button class="panel-close" id="regles-close">Fermer</button>
+    </div>
   </div>
 
   <script src="{{ url_for('static', filename='js/activity-core.js') }}"></script>

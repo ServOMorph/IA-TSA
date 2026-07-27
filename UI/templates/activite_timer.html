@@ -74,6 +74,29 @@
 </div>
 {% endblock %}
 
+{% block regles_titre %}Règles — Timer visuel{% endblock %}
+
+{% block regles %}
+<p>Outil piloté par l'adulte pour matérialiser une durée d'attente.</p>
+
+<h3>Déroulement</h3>
+<ol>
+  <li>Régler la durée avec les boutons <strong>−</strong> et <strong>+</strong> (minutes et secondes).</li>
+  <li>Appuyer sur <strong>Démarrer</strong> : le visuel se vide progressivement.</li>
+  <li>Le même bouton met en pause puis reprend. Le bouton circulaire remet à zéro.</li>
+  <li>En fin de temps, un signal sonore doux et un clignotement discret.</li>
+</ol>
+
+<h3>Bon à savoir</h3>
+<ul>
+  <li>Cinq visuels au choix dans les réglages (⚙️) : anneau, blocs, barre, soleil, couleur. Tester lequel le jeune lit le plus facilement.</li>
+  <li>Les boutons de réglage disparaissent pendant le décompte pour éviter les modifications accidentelles.</li>
+  <li>Annoncer à l'oral ce qui se passera à la fin du timer : l'outil rend la durée visible, pas la suite prévisible.</li>
+</ul>
+
+<p class="regles-note">Sert à réduire l'anxiété liée aux transitions en répondant visuellement à « combien de temps encore ? ».</p>
+{% endblock %}
+
 {% block panel_extra %}
 <div class="panel-row panel-row-col">
   <span>Visuel</span>

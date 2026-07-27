@@ -81,6 +81,24 @@ const ActivityCore = (function () {
     btnSettings.addEventListener("click", function () { panel.hidden = !panel.hidden; });
     btnClose.addEventListener("click", function () { panel.hidden = true; });
 
+    const btnRegles = document.getElementById("btn-regles");
+    const overlay = document.getElementById("regles-overlay");
+    const reglesClose = document.getElementById("regles-close");
+    if (btnRegles && overlay) {
+      function setRegles(v) {
+        overlay.hidden = !v;
+        if (v) logEvent("regles", null);
+      }
+      btnRegles.addEventListener("click", function () { setRegles(overlay.hidden); });
+      reglesClose.addEventListener("click", function () { setRegles(false); });
+      overlay.addEventListener("click", function (e) {
+        if (e.target === overlay) setRegles(false);
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && !overlay.hidden) setRegles(false);
+      });
+    }
+
     son.addEventListener("change", function () { settings.son = son.checked; save(); notify(); });
     intensite.addEventListener("input", function () { settings.intensite = +intensite.value; save(); notify(); });
     taille.addEventListener("input", function () { settings.taille = +taille.value; save(); notify(); });

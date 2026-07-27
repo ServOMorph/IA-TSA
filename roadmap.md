@@ -164,13 +164,30 @@ la zone désignée par l'adulte.
 - RGPD : aucune donnée enfant dans le code, les logs, ou les commits.
 
 ### 6. Tests avant [FAIT]
-- Test fonctionnel de la mécanique (désignation, balayage, match, non-match,
-  inversion) sur les 5 paliers.
-- Test en séance réelle avec un jeune : le palier 1 (2 zones, balayage très lent)
+- [FAIT] Test fonctionnel de la mécanique (désignation, balayage, match, non-match,
+  inversion) sur les 5 paliers — automatisé via Playwright/Chromium le 2026-07-27,
+  aucune erreur JS.
+- [TODO] Test en séance réelle avec un jeune : le palier 1 (2 zones, balayage très lent)
   peut être un plafond durable pour certains profils et non une simple introduction
   (réserve notée le 2026-07-27) — noter l'observation dans l'onglet Terrain plutôt
   que de forcer la progression.
-- Vérifier l'anti-rebond avec un appui maintenu (simulation contacteur).
+- [TODO] Vérifier l'anti-rebond avec un appui maintenu sur contacteur physique
+  (l'anti-rebond est implémenté par touche, mais non éprouvé sur matériel réel).
+
+### 8. État d'implémentation (2026-07-27)
+Code **terminé**, phase maintenue [EN COURS] tant que les tests terrain ci-dessus
+ne sont pas faits.
+
+Écarts assumés par rapport à la spécification initiale :
+- **Tout-clavier** : la désignation par clic souris a été abandonnée. Entrée = adulte,
+  Espace = jeune, les deux synchronisées au balayage. La touche du jeune n'est plus
+  configurable (deux touches fixes, plus simple et sans écran de configuration).
+  L'inversion des rôles n'exige donc jamais la souris côté jeune.
+- **Pas d'abstraction partagée** : la logique balayage/palier/tour reste locale à
+  `regarde.js` (§4 laissait le choix ouvert). Une seule activité à tour de rôle
+  existe — abstraire maintenant serait prématuré.
+- **Écran de victoire écarté** : demandé puis refusé après recherche, voir
+  [analyse_ecran_victoire.md](docs/reference/analyses/analyse_ecran_victoire.md).
 
 ### 7. Limite assumée
 Cette conception s'appuie sur une synthèse de littérature ponctuelle et non revue par
