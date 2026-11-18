@@ -79,3 +79,10 @@ Section réservée aux règles propres à ce projet, hors périmètre du kit. Ce
 
 ## Contraintes RGPD
 Ne jamais inclure dans le code, les fichiers, les commits ou tout autre artefact : des informations sur les enfants (noms, prénoms, données comportementales, données de santé), ni sur l'établissement de travail.
+
+## Modèle Codex
+
+Quand l'agent est Codex : modèle `gpt-6.1-sol` uniquement, jamais `astra`. Le modèle est
+affiché en tête de la sortie (ligne `model:`) ; le vérifier au démarrage. En cas de refus du
+modèle (« not supported with a ChatGPT account »), s'arrêter et le signaler, ne pas choisir un
+autre modèle.
